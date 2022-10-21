@@ -4,6 +4,11 @@ import cheerio from 'cheerio'
 
 const app = express()
 
+app.all('/', (req, res) => {
+    res.send(new Date().toISOString())
+})
+
+
 app.all('/candidates', async (req, res) => {
     // console.log(req.method, req.url)
     let start = performance.now()
