@@ -4,11 +4,6 @@ import cheerio from 'cheerio'
 
 const app = express()
 
-app.all('/', (req, res) => {
-    res.send(new Date().toISOString())
-})
-
-
 app.all('/candidates', async (req, res) => {
     try {
         // console.log(req.method, req.url)
@@ -34,6 +29,7 @@ app.all('/candidates', async (req, res) => {
             return { name, party, race, incumbent, photo, links }
         })
         console.log(req.method, req.url, candidates.length, Math.round(Date.now() - start))
+        res.set('Access-Control-Allow-Origin', '*')
         res.send(candidates)
     } catch (error) {
         console.error(req.method, req.url, error)
